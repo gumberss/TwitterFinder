@@ -1,0 +1,5 @@
+node_modules
+src/configuration
+soud
+yarn.lock
+.DS_Store
