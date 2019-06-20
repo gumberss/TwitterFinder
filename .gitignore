@@ -1,5 +1,4 @@
-node_modules
-src/configuration
-soud
-yarn.lock
-.DS_Store
+Alfred/node_modules
+Alfred/src/configuration
+Alfred/yarn.lock
+Alfred/.DS_Store
