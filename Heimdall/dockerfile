@@ -1,0 +1,6 @@
+FROM ravendb/ravendb
+MAINTAINER Gustavo Marin Suppi
+ENV RAVEN_ARGS='' RAVEN_SETTINGS='' RAVEN_Setup_Mode='Initial' RAVEN_DataDir='RavenData' RAVEN_ServerUrl_Tcp='38888' RAVEN_AUTO_INSTALL_CA='true' RAVEN_IN_DOCKER='true'
+VOLUME //Heimdall:/opt/RavenDB/Server/RavenData
+
+EXPOSE 38888 8080 161
