@@ -1,0 +1,42 @@
+version: '3'
+services:
+  #Buscador de Twitters
+  alfred:
+    build: 
+      dockerfile: ./Alfred/dockerfile
+      context: .
+    image: node
+    container_name: Alfred
+    ports:
+      - 3001:3000
+    networks:
+      - twitter-finder-network
+    depends_on:
+      - heimdall
+  
+  #Armazenador dos twitters
+  heimdall:
+    build: 
+      dockerfile: ./Heimdall/dockerfile
+      context: .
+    image: ravendb/ravendb
+    container_name: Heimdall
+    ports:
+      - 38888:38888 
+      - 3003:8080 
+      - 161:161
+    networks:
+      - twitter-finder-network
+  
+
+networks:
+  twitter-finder-network:
+    driver: bridge
+
+
+
+
+
+
+
+      
