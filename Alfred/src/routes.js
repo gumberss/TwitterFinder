@@ -1,8 +1,8 @@
 const express = require('express')
-const SoundController = require('./controllers/TwitterController')
+const TwitterController = require('./controllers/TwitterController')
 
 const routes = express.Router()
 
-routes.get('/getTweet/:filter', SoundController.getTweet)
+routes.get('/getTweet/:filter', TwitterController.getTweet)
 
 module.exports = routes

@@ -19,15 +19,17 @@ services:
     build: 
       dockerfile: ./Heimdall/dockerfile
       context: .
-    image: ravendb/ravendb
+    image: agiper/ravendb
     container_name: Heimdall
     ports:
       - 38888:38888 
-      - 3003:8080 
+      - 8080:8080 
       - 161:161
     networks:
       - twitter-finder-network
-  
+    volumes:
+      - //heimdall:/opt/RavenDB/Server/RavenData
+      - //twitter-finder:/opt/RavenDB/Server/RavenData
 
 networks:
   twitter-finder-network:
