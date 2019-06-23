@@ -5,8 +5,8 @@ const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
-//var process = process || require('./configuration/configuration')
-
+var dbConfig = require('./configuration/mongo-authentication')
+require('./data-persistence/database')(`mongodb://${dbConfig.host}:27017/${dbConfig.database}`)
 
 app.use((req, res, next) => {
     req.io = io

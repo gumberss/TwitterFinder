@@ -1,3 +1,5 @@
 FROM agiper/ravendb
 
+COPY ./heimdall/settings.json .
+
 EXPOSE 38888 8080 161
