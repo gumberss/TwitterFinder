@@ -1,10 +1,6 @@
-var { DocumentStore } = require('ravendb')
-var fs = require('fs')
-var path = require('path')
 var Twit = require('twit')
 
-const store = new DocumentStore(['http://192.168.99.100:8080'], 'TwitterFinder')
-store.initialize()
+var twitterRepository = require('../data-persistence/data-access/twitter')
 
 var T = new Twit(require('../configuration/twitter-authentication'))
 
@@ -28,23 +24,17 @@ module.exports = {
                 }
             }))
 
-            //var bulkInsert = store.bulkInsert()
-
-            const session = store.openSession()
-
-            newTweets.forEach(async newTweet => {
-                //bulkInsert.store(newTweet)
-                await session.store(newTweet, 'tweets/')
-            })
-            console.log(newTweets)
-
-            await session.store(newTweets[0], 'tweets/')
-//192.168.99.100:3001
-
-            //bulkInsert.finish()
-            await session.saveChanges()
-
-            return res.json([newTweets, data])
+            return twitterRepository
+                .insertMany(newTweets)
+                .then(() => res.json([newTweets, data]))
+                .catch(e => console.log(e))
         })
+    },
+    async getAll(req, res) {
+
+        return twitterRepository
+            .getAll()
+            .then(twitters => res.json(twitters))
+            .catch(e => console.log(e))
     }
 }

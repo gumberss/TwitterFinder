@@ -5,7 +5,7 @@ services:
     build: 
       dockerfile: ./Alfred/dockerfile
       context: .
-    image: node
+    image: 'gumberss/twitter-finder-alfred'
     container_name: Alfred
     ports:
       - 3001:3000
@@ -16,29 +16,10 @@ services:
   
   #Armazenador dos twitters
   heimdall:
-    build: 
-      dockerfile: ./Heimdall/dockerfile
-      context: .
-    image: agiper/ravendb
-    container_name: Heimdall
-    ports:
-      - 38888:38888 
-      - 8080:8080 
-      - 161:161
-    networks:
+    image: mongo
+    networks: 
       - twitter-finder-network
-    volumes:
-      - //heimdall:/opt/RavenDB/Server/RavenData
-      - //twitter-finder:/opt/RavenDB/Server/RavenData
 
 networks:
   twitter-finder-network:
     driver: bridge
-
-
-
-
-
-
-
-      
